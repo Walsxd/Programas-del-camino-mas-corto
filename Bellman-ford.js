@@ -1,10 +1,10 @@
 // ALGORITMO DE BELLMAN-FORD
 
-function bellmanFord(numVertices, origen) {
-    if(origen > numVertices - 1 || origen < 0 || numVertices < 0){
+function bellmanFord(numVertices, origen, aristas) {
+    if(origen > numVertices - 1 || origen < 0 || numVertices < 0 || aristas.length === 0){
         return [];
     }
-    if(numVertices == 1){
+    if(numVertices === 1){
         return [0];
     }
 
@@ -42,7 +42,7 @@ function bellmanFord(numVertices, origen) {
 
 
 
-function agregarArista(inicio, destino, peso) {
+function agregarArista(inicio, destino, peso, aristas) {
   aristas.push({ inicio, destino, peso });
 }
 function letraPorNumero(num){
@@ -55,18 +55,18 @@ function letraPorNumero(num){
     }
     return letra;
 }
-let aristas = [];
+let listaAristas = [];
 const A = 0, B = 1, C = 2, D = 3;
-agregarArista(A, B, 3);   // A → B: 3
-agregarArista(A, D, 6);   // A → D: 6
-agregarArista(B, C, 2);   // B → C: 2
-agregarArista(C, D, 3);   // C → D: 3
-agregarArista(D, B, -4);  // D → B: -4
+agregarArista(A, B, 3, listaAristas);   // A → B: 3
+agregarArista(A, D, 6, listaAristas);   // A → D: 6
+agregarArista(B, C, 2, listaAristas);   // B → C: 2
+agregarArista(C, D, 3, listaAristas);   // C → D: 3
+agregarArista(D, B, -4, listaAristas);  // D → B: -4
 
 const origen = 0;
 const originLetter = letraPorNumero(origen);
-const numVertices = Math.max(...aristas.flatMap(e => [e.inicio, e.destino])) + 1;
-const result = bellmanFord(numVertices, origen);
+const numVertices = Math.max(...listaAristas.flatMap(e => [e.inicio, e.destino])) + 1;
+const result = bellmanFord(numVertices, origen, listaAristas);
 
 console.log("Distancias más cortas desde el vértice " + originLetter + ": ");
 if(result === null){
