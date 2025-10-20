@@ -12,8 +12,9 @@ function bellmanFord(numVertices, origen, aristas) {
     distancias[origen] = 0;
 
     let cambio = true;
+    let iteraciones = 0;    
 
-    while (cambio) {
+    while (cambio && iteraciones < numVertices - 1) {
         cambio = false;
 
         // "Relajamos" las aristas buscando si hay un camino mas corto.
@@ -28,6 +29,7 @@ function bellmanFord(numVertices, origen, aristas) {
         if (!cambio) {
           break;
         }
+        iteraciones ++;
     }
 
     // Verificar ciclos negativos
